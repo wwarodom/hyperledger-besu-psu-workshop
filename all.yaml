@@ -1,0 +1,114 @@
+ node1:
+    image: hyperledger/besu:latest
+    environment:
+      - BESU_PRIVACY_ONCHAIN_GROUPS_ENABLED=true
+    command: [
+      "--genesis-file=/opt/besu/src/genesis.json",
+      "--data-path=/opt/besu/data",
+      "--node-private-key-file=/opt/besu/key/key",
+      "--rpc-http-enabled",
+      "--rpc-http-host=0.0.0.0",
+      "--rpc-http-port=8545",
+      "--rpc-http-cors-origins=*",
+      "--rpc-http-api=EEA,WEB3,ETH,NET,PRIV,IBFT,DEBUG,TRACE,TXPOOL",
+      "--rpc-ws-enabled",
+      "--rpc-ws-host=0.0.0.0",
+      "--rpc-ws-port=8546",
+      "--rpc-ws-api=WEB3,ETH,NET,PRIV,IBFT,DEBUG,TRACE,TXPOOL",
+      "--min-gas-price=0",
+      "--host-whitelist=*"]
+    volumes:
+      - ${CURRENT_DIR}/genesis:/opt/besu/src
+      - ${CURRENT_DIR}/node1:/opt/besu/data
+      - ${CURRENT_DIR}/key:/opt/besu/key
+    ports:
+      - 8545:8545/tcp
+      - 8546:8546/tcp
+      - 30303:30303/tcp
+      - 30303:30303/udp
+ node2:
+    image: hyperledger/besu:latest
+    environment:
+      - BESU_PRIVACY_ONCHAIN_GROUPS_ENABLED=true
+    command: [
+      "--genesis-file=/opt/besu/src/genesis.json",
+      "--data-path=/opt/besu/data",
+      "--node-private-key-file=/opt/besu/key/key2",
+      "--rpc-http-enabled",
+      "--rpc-http-host=0.0.0.0",
+      "--rpc-http-port=8545",
+      "--rpc-http-cors-origins=*",
+      "--rpc-http-api=EEA,WEB3,ETH,NET,PRIV,IBFT,DEBUG,TRACE,TXPOOL",
+      "--rpc-ws-enabled",
+      "--rpc-ws-host=0.0.0.0",
+      "--rpc-ws-port=8546",
+      "--rpc-ws-api=WEB3,ETH,NET,PRIV,IBFT,DEBUG,TRACE,TXPOOL",
+      "--min-gas-price=0",
+      "--bootnodes=enode://13839f31c69b1dd61802ce8febc051cde6fac75abc0b161b6fb61ad5fa9ec08653922979faa226d8e2c4cdeec72328b7ba6e5e10014873d8edbf087d55b21699@${ip}:30303",
+      "--host-whitelist=*"]
+    volumes:
+      - ${CURRENT_DIR}/genesis:/opt/besu/src
+      - ${CURRENT_DIR}/node2:/opt/besu/data
+      - ${CURRENT_DIR}/key:/opt/besu/key
+    ports:
+      - 30304:30303/tcp
+      - 30304:30303/udp
+ node3:
+    image: hyperledger/besu:latest
+    environment:
+      - BESU_PRIVACY_ONCHAIN_GROUPS_ENABLED=true
+    command: [
+      "--genesis-file=/opt/besu/src/genesis.json",
+      "--data-path=/opt/besu/data",
+      "--node-private-key-file=/opt/besu/key/key3",
+      "--rpc-http-enabled",
+      "--rpc-http-host=0.0.0.0",
+      "--rpc-http-port=8545",
+      "--rpc-http-cors-origins=*",
+      "--rpc-http-api=EEA,WEB3,ETH,NET,PRIV,IBFT,DEBUG,TRACE,TXPOOL",
+      "--rpc-ws-enabled",
+      "--rpc-ws-host=0.0.0.0",
+      "--rpc-ws-port=8546",
+      "--rpc-ws-api=WEB3,ETH,NET,PRIV,IBFT,DEBUG,TRACE,TXPOOL",
+      "--min-gas-price=0",
+      "--bootnodes=enode://fc6faa8cdc90148fef8fa732ba37a08617fabb1735928e810529f1a8f7d9b2a591f467f89a3e4eab97c8f68cbc5cc96d0653e199ea6ceba6c7d4cf022770e6f0@${ip}:30304,enode://13839f31c69b1dd61802ce8febc051cde6fac75abc0b161b6fb61ad5fa9ec08653922979faa226d8e2c4cdeec72328b7ba6e5e10014873d8edbf087d55b21699@${ip}:30303",
+      "--host-whitelist=*"]
+    volumes:
+      - ${CURRENT_DIR}/genesis:/opt/besu/src
+      - ${CURRENT_DIR}/node3:/opt/besu/data
+      - ${CURRENT_DIR}/key:/opt/besu/key
+#    ports:
+#      - 8545:8545/tcp
+#      - 8546:8546/tcp
+#      - 30303:30303/tcp
+#      - 30303:30303/udp
+
+ node4:
+    image: hyperledger/besu:latest
+    environment:
+      - BESU_PRIVACY_ONCHAIN_GROUPS_ENABLED=true
+    command: [
+      "--genesis-file=/opt/besu/src/genesis.json",
+      "--data-path=/opt/besu/data",
+      "--node-private-key-file=/opt/besu/key/key4",
+      "--rpc-http-enabled",
+      "--rpc-http-host=0.0.0.0",
+      "--rpc-http-port=8545",
+      "--rpc-http-cors-origins=*",
+      "--rpc-http-api=EEA,WEB3,ETH,NET,PRIV,IBFT,DEBUG,TRACE,TXPOOL",
+      "--rpc-ws-enabled",
+      "--rpc-ws-host=0.0.0.0",
+      "--rpc-ws-port=8546",
+      "--rpc-ws-api=WEB3,ETH,NET,PRIV,IBFT,DEBUG,TRACE,TXPOOL",
+      "--min-gas-price=0",
+      "--bootnodes=enode://fc6faa8cdc90148fef8fa732ba37a08617fabb1735928e810529f1a8f7d9b2a591f467f89a3e4eab97c8f68cbc5cc96d0653e199ea6ceba6c7d4cf022770e6f0@${ip}:30304,enode://13839f31c69b1dd61802ce8febc051cde6fac75abc0b161b6fb61ad5fa9ec08653922979faa226d8e2c4cdeec72328b7ba6e5e10014873d8edbf087d55b21699@${ip}:30303",
+      "--host-whitelist=*"]
+    volumes:
+      - ${CURRENT_DIR}/genesis:/opt/besu/src
+      - ${CURRENT_DIR}/node4:/opt/besu/data
+      - ${CURRENT_DIR}/key:/opt/besu/key
+#    ports:
+#      - 8545:8545/tcp
+#      - 8546:8546/tcp
+#      - 30303:30303/tcp
+#      - 30303:30303/udp

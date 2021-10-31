@@ -1,0 +1,30 @@
+ node3:
+    image: hyperledger/besu:latest
+    environment:
+      - BESU_PRIVACY_ONCHAIN_GROUPS_ENABLED=true
+    command: [
+      "--genesis-file=/opt/besu/src/genesis.json",
+      "--data-path=/opt/besu/data",
+      "--node-private-key-file=/opt/besu/key/key3",
+      "--rpc-http-enabled",
+      "--rpc-http-host=0.0.0.0",
+      "--rpc-http-port=8545",
+      "--rpc-http-cors-origins=*",
+      "--rpc-http-api=EEA,WEB3,ETH,NET,PRIV,IBFT,DEBUG,TRACE,TXPOOL",
+      "--rpc-ws-enabled",
+      "--rpc-ws-host=0.0.0.0",
+      "--rpc-ws-port=8546",
+      "--rpc-ws-api=WEB3,ETH,NET,PRIV,IBFT,DEBUG,TRACE,TXPOOL",
+      "--min-gas-price=0",
+      "--bootnodes=enode://13839f31c69b1dd61802ce8febc051cde6fac75abc0b161b6fb61ad5fa9ec08653922979faa226d8e2c4cdeec72328b7ba6e5e10014873d8edbf087d55b21699@172.17.0.3:30303",
+      "--host-whitelist=*"]
+    volumes:
+      - /Users/kui.naratip/Desktop/besu/genesis:/opt/besu/src
+      - /Users/kui.naratip/Desktop/besu/node3:/opt/besu/data
+      - /Users/kui.naratip/Desktop/besu/key:/opt/besu/key
+#    ports:
+#      - 8545:8545/tcp
+#      - 8546:8546/tcp
+#      - 30303:30303/tcp
+#      - 30303:30303/udp
+
